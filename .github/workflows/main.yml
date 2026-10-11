@@ -1,0 +1,27 @@
+name: Build AutoDecorator
+
+on:
+workflow_dispatch:
+push:
+branches:
+- main
+
+jobs:
+build:
+runs-on: ubuntu-latest
+
+steps:
+  - name: Descargar repositorio
+    uses: actions/checkout@v4
+
+  - name: Compilar mod Geode
+    uses: geode-sdk/build-geode-mod@main
+
+  - name: Guardar archivo .geode
+    uses: actions/upload-artifact@v4
+    with:
+      name: AutoDecorator
+      path: |
+        build/**/*.geode
+        *.geode
+      if-no-files-found: error
